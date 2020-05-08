@@ -29,6 +29,7 @@ export class MarkedCardsComponent implements OnInit {
   storeIndex : number = 0;
   showCardAnswer : boolean[] = [];
   temp : boolean = false;
+  secondaryTempCard : Card[] = [];
   
   getCards() {
     return this.cardService.getMyCreatedSets();
@@ -42,7 +43,11 @@ export class MarkedCardsComponent implements OnInit {
   OpenSubject(index : number) {
     this.showCardAnswer = [];
     this.cardSet = this.cardService.getCardSet(index);
-    this.tempCard = this.cardSet.Card;
+    for(let card of this.cardSet.Card) {
+      if(card.marked === true) {
+        this.tempCard.push(card);
+      }
+    }
     this.questionCard.push(this.tempCard[0]);
     for(let card of this.cardSet.Card) {
       this.showCardAnswer.push(this.temp);
@@ -75,12 +80,13 @@ export class MarkedCardsComponent implements OnInit {
     this.cardBuilderForm.reset();
   }
   nextQuestion(index : number) {
+    try {
     if(this.tempCard.length != 0) {
       if (index !== this.tempCard.length - 1){
         this.questionCard[0] = this.tempCard[index + 1]
         this.storeIndex = index + 1;
       }
-      else if (index >= this.tempCard.length){
+      else if (index >= this.tempCard.length -1){
         this.questionCard[0] = this.tempCard[0];
         this.storeIndex = 0;
       }
@@ -91,8 +97,13 @@ export class MarkedCardsComponent implements OnInit {
     else {
 
     }
+    }
+    catch(Exeception) {
+
+    }
   }
   previousQuestion(index : number) {
+    try {
     if(this.tempCard.length != 0) {
       if(index !== 0) {
         this.questionCard[0] = this.tempCard[index -1];
@@ -106,6 +117,10 @@ export class MarkedCardsComponent implements OnInit {
     }
     else {
 
+    }
+    }
+    catch(Exception) {
+      
     }
   }
   selectQuestion(index : number) {
@@ -127,10 +142,17 @@ export class MarkedCardsComponent implements OnInit {
     return this.tempCard.length != 0;
   }
   notMarked(int : number) {
-    this.tempCard[int].marked = true;
+    this.tempCard[int].marked = false;
+    for(let card of this.tempCard) {
+      if(card.marked === true) {
+        this.secondaryTempCard.push(card);
+      }
+    }
+    this.tempCard = this.secondaryTempCard;
+    this.secondaryTempCard = [];
   }
   checkMarked(index : number) {
-    return this.tempCard[index].marked === false;
+    return this.tempCard[index].marked === true;
   }
 
 

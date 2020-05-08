@@ -34,13 +34,34 @@ export class CreateSetComponent implements OnInit {
     cardID : 1,
     setID : 1
   }
+  cardStore2 : Card = {
+    question : '',
+    answer : '',
+    marked : false,
+    cardID : 1,
+    setID : 1
+  }
+  blankCard : Card = {
+    question : '',
+    answer : '',
+    marked : false,
+    cardID : 1,
+    setID : 1
+  }  
   storeNum : number;
   editBoolean : boolean = true;
   addBoolean : boolean = false;
 
 
-  addCard(question : string, answer : string) {
-    this.tempCard.push({question, answer}as Card);
+  addCard(question1 : string, answer1 : string) {
+    this.cardStore2 = {
+      question : question1,
+      answer : answer1,
+      setID : 1,
+      cardID : 1,
+      marked : false
+    }
+    this.tempCard.push(this.cardStore2);
     this.cardBuilderForm.reset();
   }
   getCreatedCards() {
@@ -97,6 +118,7 @@ export class CreateSetComponent implements OnInit {
     }
     this.tempCard[this.storeNum] = this.cardStore;
     this.editBoolean = true;
+    this.cardStore = this.blankCard
     this.storeNum = 0;
     this.addBoolean = false;
   }

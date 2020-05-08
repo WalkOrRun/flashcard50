@@ -77,11 +77,11 @@ export class SingleCardComponent implements OnInit {
   }
   nextQuestion(index : number) {
     if(this.tempCard.length != 0) {
-      if (index !== this.tempCard.length - 1){
+      if (index !== this.tempCard.length-1){
         this.questionCard[0] = this.tempCard[index + 1]
         this.storeIndex = index + 1;
       }
-      else if (index >= this.tempCard.length){
+      else if (index >= this.tempCard.length-1){
         this.questionCard[0] = this.tempCard[0];
         this.storeIndex = 0;
       }
