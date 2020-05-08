@@ -9,7 +9,6 @@ p {
   }
   a {
     cursor: pointer;
-    cursor: hand;
   }
   button {
     font-family: Arial;
@@ -18,10 +17,10 @@ p {
     padding: 5px 10px;
     border-radius: 4px;
     cursor: pointer;
-    cursor: hand;
   }
   button:hover {
     background-color: #cfd8dc;
+    cursor: pointer;
   }  
   /* Navigation link styles */
 nav a {
